@@ -107,7 +107,10 @@ class Printer
 		}
 
 		$arguments = apply_filters('Zprint\printOrderArguments', $arguments, $order);
+
+		$vendor_id = dokan_get_seller_id_by_order($order->get_id());
 		
+        array_push($arguments, [LocationFilter::USER, $vendor_id]);
 	
 		$filter = array_map(function ($argument) {
 			$value = $argument[1];
